@@ -52,8 +52,15 @@ jobs:
 
     steps:
       - checkout
-      - run: cd ~
-      - run: ls -l
+
+      # Initialise the dev config
+      - run: cd ~/terraform/assets/dev/services/cluster
+      - run: terraform init
+
+      # Initialise the modules
+      - run: cd ~/terraform/modules/services/cluster
+      - run: terraform init
+
       #- run:
       #    name: Test existance of .ssh directory
       #    command: mkdir -p "/home/circleci/.ssh"
