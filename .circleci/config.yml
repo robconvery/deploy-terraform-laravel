@@ -54,10 +54,10 @@ jobs:
       - checkout
 
       # Initialise the dev config
-      - run: ./terraform/assets/dev/services/cluster/terraform init
+      - run: cd terraform/assets/dev/services/cluster; terraform init
 
       # Initialise the modules
-      - run: ./terraform/modules/services/cluster/terraform init
+      - run: cd terraform/modules/services/cluster; terraform init
 
       #- run:
       #    name: Test existance of .ssh directory
