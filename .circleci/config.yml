@@ -33,8 +33,8 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
 
-      # run tests!
-      - run: phpunit
-
-      # run php code sniffer
+      - run: php artisan key:generate
+      # Run unit tests
+      - run: ./vendor/bin/phpunit
+      # Run php code sniffer
       - run: composer cs
