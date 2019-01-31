@@ -4,7 +4,8 @@
 #
 version: 2
 jobs:
-  build:
+  test:
+
     docker:
       # specify the version you desire here
       - image: circleci/php:7.3-browsers
@@ -41,3 +42,37 @@ jobs:
       - run: ./vendor/bin/phpunit
       # Run php code sniffer
       - run: composer cs
+
+  deploy:
+
+    docker:
+      - image: circleci/php:7.2-node-browsers
+
+    working_directory: ~/laravel
+
+    steps:
+      - run:
+          name: install open ssl
+          command: sudo apt-get install openssh-server
+      - run:
+          name: Test existance of .ssh directory
+          command: mkdir -p "/home/circleci/.ssh"
+      #- run:
+      #    name: Deploy if tests pass and branch is Master
+      #    command: ssh -o StrictHostKeyChecking=no deploy@34.248.153.156 "./deploy"
+
+workflows:
+  version: 2
+  build-check:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - build-test
+          filters:
+            branches:
+              only: master
