@@ -54,11 +54,11 @@ jobs:
       - checkout
 
       # Initialise the dev config
-      - run: cd ~/terraform/assets/dev/services/cluster
+      - run: cd terraform/assets/dev/services/cluster
       - run: terraform init
 
       # Initialise the modules
-      - run: cd ~/terraform/modules/services/cluster
+      - run: cd terraform/modules/services/cluster
       - run: terraform init
 
       #- run:
