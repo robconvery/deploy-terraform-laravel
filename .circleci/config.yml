@@ -26,6 +26,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
+      - run: sudo composer self-update
       - run: composer install -n --prefer-dist
 
       - save_cache:
@@ -33,7 +34,9 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
 
+      - run: cp .env.example .env
       - run: php artisan key:generate
+
       # Run unit tests
       - run: ./vendor/bin/phpunit
       # Run php code sniffer
