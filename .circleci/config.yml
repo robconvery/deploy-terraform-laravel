@@ -53,11 +53,20 @@ jobs:
     steps:
       - checkout
 
-      # Initialise the dev config
-      - run: cd terraform/assets/dev/services/cluster; terraform init
-
       # Initialise the modules
-      - run: cd terraform/modules/services/cluster; terraform init
+      - run:
+          name: Intialise terraform modules
+          command: cd terraform/modules/services/cluster; terraform init
+
+
+      # Initialise the dev config
+      - run:
+          name: Intialise terraform asset
+          command: cd terraform/assets/dev/services/cluster; terraform init
+
+      - run:
+          name: Apply terraform
+          command: cd terraform/assets/dev/services/cluster; terraform apply -auto-approve
 
       #- run:
       #    name: Test existance of .ssh directory
