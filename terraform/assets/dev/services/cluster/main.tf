@@ -1,3 +1,11 @@
+terraform {
+    backend "s3" {
+        bucket = "deploy-terraform-laravel-state"
+        key    = "assets/dev/services/cluster/terraform.tfstate"
+        region = "eu-west-1"
+    }
+}
+
 provider "aws" {
     region = "eu-west-1"
 }
